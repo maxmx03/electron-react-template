@@ -3,11 +3,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   watch: true,
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  devtool: 'cheap-module-source-map',
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
