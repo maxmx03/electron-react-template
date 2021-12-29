@@ -12,5 +12,6 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "ignorePatterns": ["node_modules/**", "**/dist/**"],
   "rules": {}
 }
