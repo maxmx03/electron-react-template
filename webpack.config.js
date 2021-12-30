@@ -1,26 +1,50 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { merge } = require('webpack-merge');
 const path = require('path');
 
-module.exports = {
-  entry: './src/index.jsx',
+const distFolder = path.resolve(__dirname, 'dist');
+const sourceFolder = path.resolve(__dirname, 'src');
+
+const devConfig = {
+  mode: 'development',
+  devtool: 'inline-source-map',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  devtool: 'cheap-module-source-map',
-  resolve: {
-    extensions: ['.js', '.jsx'],
+    path: distFolder,
+    clean: true,
   },
   devServer: {
-    port: 3000,
+    static: distFolder,
+    port: process.env.PORT ?? 8080,
     hot: true,
+  },
+};
+
+const prodConfig = {
+  mode: 'production',
+  devtool: 'hidden-source-map',
+  output: {
+    filename: '[name].[contenthash].js',
+    path: distFolder,
+    clean: true,
+    pathinfo: false,
+  },
+  optimization: {
+    runtimeChunk: true,
+  },
+};
+
+const commonConfig = {
+  entry: `${sourceFolder}/index.jsx`,
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /nodeModules/,
+        include: sourceFolder,
         use: {
           loader: 'babel-loader',
           options: {
@@ -30,10 +54,12 @@ module.exports = {
       },
       {
         test: /\.css$/i,
+        include: sourceFolder,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
+        include: sourceFolder,
         use: [
           {
             loader: 'file-loader',
@@ -44,6 +70,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
   ],
+};
+
+module.exports = (env) => {
+  if (env.development) {
+    return merge(commonConfig, devConfig);
+  }
+
+  return merge(commonConfig, prodConfig);
 };

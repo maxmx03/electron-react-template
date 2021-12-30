@@ -14,11 +14,10 @@ function createWindow() {
     },
   });
 
-  if (process.env.NODE_ENV === 'production') {
-    win.loadFile('./dist/index.html');
-  } else {
-    win.loadURL('http://localhost:3000/');
-  }
+  const port = process.env.PORT ?? '8080';
+  const host = procenss.env.HOST ?? 'http://localhost:';
+
+  win.loadURL(host + port);
 }
 
 app.whenReady().then(() => {
