@@ -15,7 +15,7 @@ function createWindow() {
   });
 
   const port = process.env.PORT ?? '8080';
-  const host = procenss.env.HOST ?? 'http://localhost:';
+  const host = process.env.HOST ?? 'http://localhost:';
 
   win.loadURL(host + port);
 }
