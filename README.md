@@ -2,7 +2,7 @@
 
 1. Watch the changes and generate dist folder
 ```powershell
-yarn run watch
+yarn run serve
 ```
 
 2. Start electron
