@@ -1,7 +1,7 @@
 {
   "name": "react-electron-template",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "./main",
   "scripts": {
     "start": "electron .",
     "serve": "webpack serve --env development",
