@@ -1,11 +1,17 @@
 # How to
 
-1. Start the server
+- Install dependencies
+```
+npm install -g yarn
+yarn
+```
+
+- Start the server
 ```powershell
 yarn run serve
 ```
 
-2. Start electron
+- Start electron
 ```powershell
 yarn run start
 ```
