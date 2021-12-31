@@ -1,6 +1,6 @@
 # How to
 
-1. Watch the changes and generate dist folder
+1. Start the server
 ```powershell
 yarn run serve
 ```
