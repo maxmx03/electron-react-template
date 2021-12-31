@@ -4,15 +4,19 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const { greeting, themeMode } = window.myAPI;
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Electron + React!</p>
+        <p>{greeting}</p>
         <p>
           <button type="button" onClick={() => setCount(count + 1)}>
             count is: {count}
+          </button>
+          <button type="button" onClick={() => themeMode()}>
+            Toggle Dark Mode
           </button>
         </p>
         <p>
