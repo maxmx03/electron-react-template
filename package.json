@@ -5,7 +5,8 @@
   "scripts": {
     "start": "electron .",
     "serve": "webpack serve --env development",
-    "build": "webpack"
+    "build": "webpack",
+    "preview": "yarn run build && electron ."
   },
   "keywords": [],
   "author": "Max Miliano",

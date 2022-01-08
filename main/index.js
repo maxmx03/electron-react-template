@@ -15,10 +15,14 @@ function createWindow() {
       preload: path.resolve(__dirname, 'preload.js'),
     },
   });
-  const port = process.env.PORT ?? '8080';
-  const host = process.env.HOST ?? 'http://localhost:';
 
-  win.loadURL(host + port);
+  if (process.env.NODE_ENV === 'production') {
+    win.loadFile(path.resolve('dist', 'index.html'));
+  } else {
+    const port = process.env.PORT ?? '8080';
+
+    win.loadURL('http://localhost:' + port);
+  }
 
   ipcMain.handle('dark-mode:toggle', () => {
     if (nativeTheme.shouldUseDarkColors) {

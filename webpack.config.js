@@ -84,7 +84,7 @@ const commonConfig = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({ template: './index.html' }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
